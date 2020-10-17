@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { GetStaticPropsContext } from 'next';
+import axios from 'axios';
+import Comment from '../../src/components/Comment';
+import AddCommentForm from '../../src/components/AddCommentForm';
 
-interface Comment {
+interface IComment {
     postId: number,
     body: string,
     id: number
@@ -11,7 +14,7 @@ interface IPost {
     id: number,
     title: string,
     body: string,
-    comments: Comment[]
+    comments: IComment[]
 }
 
 interface PostProps {
@@ -33,14 +36,15 @@ const PostCard = ({ post }: PostProps) => {
                         {' '}
                     </h3>
                     <p>{body}</p>
-                    {comments.map(comment => <div key={comment.id}>{comment.body}</div>)}
+                    {comments.map(comment => <Comment key={comment.id} {...comment} />)}
+                    <AddCommentForm postId={id} />
                 </Post>
             )
     )
 }
 export async function getServerSideProps({ params }: GetStaticPropsContext) {
-    const postsRequest = await fetch(`https://simple-blog-api.crew.red/posts/${params.postId}?_embed=comments`)
-    const post = await postsRequest.json();
+    const postsRequest = await axios.get(`https://simple-blog-api.crew.red/posts/${params.postId}?_embed=comments`);
+    const post = await postsRequest.data;
     return { props: { post } }
 }
 

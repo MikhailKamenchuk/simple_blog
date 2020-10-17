@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router'
 import styled from 'styled-components';
 import Link from 'next/link';
+import axios from "axios";
 
 
 interface IFormInputs {
@@ -9,20 +10,12 @@ interface IFormInputs {
     body: string,
 }
 
-
 const CreatePostForm = () => {
     const router = useRouter();
     const { register, errors, handleSubmit, reset } = useForm<IFormInputs>();
-    const onSubmit = (data, e) => {
+    const onSubmit = (data: IFormInputs, e: any) => {
         e.preventDefault();
-        // fetch('https://5f33e64ccfaf5a001646b6d1.mockapi.io/api/v1/posts', {
-        fetch('https://simple-blog-api.crew.red/posts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+        axios.post('https://simple-blog-api.crew.red/posts', data)
             .then(() => {
                 router.push('/posts');
                 reset()

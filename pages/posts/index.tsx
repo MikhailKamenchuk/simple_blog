@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import axios from 'axios';
 import PostsList from '../../src/components/PostsList';
 
 interface Post {
@@ -43,9 +44,9 @@ const Posts = ({ posts }: PostsProps) => {
   )
 }
 export async function getServerSideProps() {
-  const postsRequest = await fetch(`https://simple-blog-api.crew.red/posts`)
-  const posts = await postsRequest.json();
-  return { props: { posts } }
+    const postsRequest = await axios.get(`https://simple-blog-api.crew.red/posts`);
+    const posts = await postsRequest.data;
+    return { props: { posts } }
 }
 
 const Container = styled.div`

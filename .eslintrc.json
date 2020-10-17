@@ -15,6 +15,7 @@
     "plugin:import/warnings",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:import/typescript",
     "prettier"
   ],
   "globals": {
@@ -31,7 +32,13 @@
   "settings": {
     "react": {
       "version": "detect"
-    }
+    },
+    "import/extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ]
   },
   "plugins": [
     "react",
@@ -47,6 +54,13 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "svg": "always"
+      }
+    ],
     "react/jsx-props-no-spreading": [
       0,
       {

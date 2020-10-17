@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const Post = ({ id, title, body }) => {
+interface IPost {
+    id: number,
+    title: string,
+    body: string,
+    comments: string[]
+}
+
+const Post = ({ id, title, body }: IPost) => {
     const titleShort = !title
         ? null
         : `${title.substring(0, 44)}...`
@@ -23,6 +30,7 @@ const Post = ({ id, title, body }) => {
 }
 
 const Card = styled.a`
+    min-height: 12rem;
     margin: 1rem;
     flex-basis: 45%;
     padding: 1.5rem;

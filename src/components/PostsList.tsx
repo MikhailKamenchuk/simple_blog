@@ -1,7 +1,18 @@
 import styled from 'styled-components';
 import Post from './Post';
 
-const PostsList = ({ posts }) => (
+interface IPost {
+    id: number,
+    title: string,
+    body: string,
+    comments: string[]
+}
+
+interface IPostsListProps {
+    posts: IPost[]
+}
+
+const PostsList = ({ posts }: IPostsListProps) => (
     <Grid>
         {!posts ? null : posts.map(post => <Post key={post.id} {...post} />)}
     </Grid>
