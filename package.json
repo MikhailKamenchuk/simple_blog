@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./components/** ./pages/** -c .eslintrc.json --ext js,jsx",
-    "lint-fix": "eslint ./components/** ./pages/** -c .eslintrc.json --fix --ext js,jsx"
+    "lint": "eslint ./src/** ./pages/** -c .eslintrc.json --ext js,jsx",
+    "lint-fix": "eslint ./src/** ./pages/** -c .eslintrc.json --fix --ext js,jsx"
   },
   "dependencies": {
     "-": "0.0.1",

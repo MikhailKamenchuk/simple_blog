@@ -125,49 +125,49 @@ const ValidationError = styled.div`
 `;
 
 const Container = styled.div`
-  min-height: 100vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    min-height: 100vh;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 const Header = styled.header`
     padding: 0 0.5rem;
     display: flex;
 `;
 const Navigation = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
 `;
 
 const Main = styled.main`
-  padding: 2rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    padding: 2rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 const Footer = styled.footer`
-  width: 100%;
-  height: 50px;
-  border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 const Title = styled.h1`
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-  text-align: center;
-  & a:hover,
-  & a:focus,
-  & a:active {
-      text-decoration: underline;
+    margin: 0;
+    line-height: 1.15;
+    font-size: 4rem;
+    text-align: center;
+    & a:hover,
+    & a:focus,
+    & a:active {
+        text-decoration: underline;
     }
 `;
 

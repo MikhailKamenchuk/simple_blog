@@ -100,10 +100,10 @@ const Title = styled.h1`
 `;
 
 const StyledLink = styled.a`
-  color: ${({ theme }) => theme.colors.primary}};
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 10px;
+    color: ${({ theme }) => theme.colors.primary}};
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
 `;
 
 export default Posts
