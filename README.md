@@ -28,6 +28,8 @@ Open [https://simple-blog-ashy.vercel.app/](https://simple-blog-ashy.vercel.app/
 - Next.js
 - TypeScript
 - React.js
+- Redux
+- redux-thunk
 - styled-components
 - axios
 - ESLint

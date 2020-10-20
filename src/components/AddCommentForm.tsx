@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import axios from "axios";
+import { connect } from 'react-redux';
+
+import { addComment } from '../../redux/actions';
+
 
 interface IComment {
     id: string,
@@ -12,12 +15,13 @@ interface AddCommentFormProps {
     postId: number,
 }
 
-const AddCommentForm = ({ postId }: AddCommentFormProps) => {
+const AddCommentForm = ({ postId, addComment }: AddCommentFormProps, ) => {
+    // debugger
     const { register, errors, handleSubmit, reset } = useForm<IComment>();
     const router = useRouter();
     const onSubmit = (data: IComment, e: any) => {
         e.preventDefault();
-        axios.post('https://simple-blog-api.crew.red/comments', { ...data, postId })
+         addComment(data, postId)
             .then(() => {
                 router.reload();
                 reset()
@@ -103,4 +107,4 @@ const ValidationError = styled.div`
     color: ${({ theme }) => theme.colors.red}
 `;
 
-export default AddCommentForm
+export default connect(null, { addComment })(AddCommentForm)

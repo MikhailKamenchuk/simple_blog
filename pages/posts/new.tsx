@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router'
 import styled from 'styled-components';
 import Link from 'next/link';
-import axios from "axios";
+import { connect } from "react-redux";
+import { addNewPost } from '../../redux/actions'
 
 
 interface IFormInputs {
@@ -10,12 +11,13 @@ interface IFormInputs {
     body: string,
 }
 
-const CreatePostForm = () => {
+const CreatePostForm = ({addNewPost}) => {
+    
     const router = useRouter();
     const { register, errors, handleSubmit, reset } = useForm<IFormInputs>();
     const onSubmit = (data: IFormInputs, e: any) => {
         e.preventDefault();
-        axios.post('https://simple-blog-api.crew.red/posts', data)
+        addNewPost(data)
             .then(() => {
                 router.push('/posts');
                 reset()
@@ -178,4 +180,5 @@ const StyledLink = styled.a`
     margin-left: 10px;
 `;
 
-export default CreatePostForm 
+
+export default connect(null, { addNewPost })(CreatePostForm) 

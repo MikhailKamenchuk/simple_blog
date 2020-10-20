@@ -1,22 +1,19 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React from 'react';
+import { connect, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import axios from 'axios';
+import { IState } from '../redux/store';
+import { fetchPostsList } from '../redux/actions';
+
 import PostsList from '../src/components/PostsList';
 
-interface Post {
-    id: number,
-    title: string,
-    body: string,
-    comments: string[]
-}
 
-interface HomeProps {
-    posts: Post[]
-}
-
-
-const Home = ({ posts }: HomeProps) => {
+const Home = ({ error }: IState) => {
+    if (error) {
+        return <div>Something wrong...</div>
+    }
+    const lastPosts = useSelector((state: IState) => state.posts.slice(state.posts.length - 4))
     return (
         <Container>
             <Head>
@@ -38,7 +35,7 @@ const Home = ({ posts }: HomeProps) => {
                 <Description>
                     Latest posts
                 </Description>
-                <PostsList posts={posts} />
+                <PostsList posts={lastPosts} />
             </Main>
             <Footer>
                 <div>Created by Mikhail Kamenchuk</div>
@@ -47,11 +44,7 @@ const Home = ({ posts }: HomeProps) => {
     )
 }
 
-export async function getServerSideProps() {
-    const postsRequest = await axios.get(`https://simple-blog-api.crew.red/posts`)
-    const posts = await postsRequest.data;
-    return { props: { posts: posts.slice(0, 4) } }
-}
+Home.getInitialProps = ({ store }) => store.dispatch(fetchPostsList());
 
 const Container = styled.div`
     min-height: 100vh;
@@ -108,4 +101,4 @@ const StyledLink = styled.a`
     margin-left: 10px;
 `;
 
-export default Home
+export default connect(state => state)(Home);

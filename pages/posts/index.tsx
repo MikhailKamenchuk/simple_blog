@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import axios from 'axios';
+import {connect} from 'react-redux';
 import PostsList from '../../src/components/PostsList';
+import {fetchPostsList} from '../../redux/actions'
+
 
 interface Post {
     id: number,
@@ -43,11 +45,8 @@ const Posts = ({ posts }: PostsProps) => {
       </Container>
   )
 }
-export async function getServerSideProps() {
-    const postsRequest = await axios.get(`https://simple-blog-api.crew.red/posts`);
-    const posts = await postsRequest.data;
-    return { props: { posts } }
-}
+
+Posts.getInitialProps = ({ store }) => store.dispatch(fetchPostsList());
 
 const Container = styled.div`
     min-height: 100vh;
@@ -106,4 +105,4 @@ const StyledLink = styled.a`
     margin-left: 10px;
 `;
 
-export default Posts
+export default connect(state => state)(Posts)

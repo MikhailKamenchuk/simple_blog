@@ -1,30 +1,13 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { GetStaticPropsContext } from 'next';
-import axios from 'axios';
+import { connect } from 'react-redux'
 import Comment from '../../src/components/Comment';
 import AddCommentForm from '../../src/components/AddCommentForm';
+import { fetchPostById } from '../../redux/actions';
 
-interface IComment {
-    postId: number,
-    body: string,
-    id: number
-}
-interface IPost {
-    id: number,
-    title: string,
-    body: string,
-    comments: IComment[]
-}
-
-interface PostProps {
-    post: IPost
-}
-
-
-const PostCard = ({ post }: PostProps) => {
+const PostCard = ({ post }) => {
     const router = useRouter();
-    const { id, title, body, comments }: IPost = post;
+    const { id, title, body, comments } = post;
     return (
         !id
             ? (<PostNotFound> &#9785; Post Not Found</PostNotFound>)
@@ -42,11 +25,8 @@ const PostCard = ({ post }: PostProps) => {
             )
     )
 }
-export async function getServerSideProps({ params }: GetStaticPropsContext) {
-    const postsRequest = await axios.get(`https://simple-blog-api.crew.red/posts/${params.postId}?_embed=comments`);
-    const post = await postsRequest.data;
-    return { props: { post } }
-}
+
+PostCard.getInitialProps = ({ store, query }) => store.dispatch(fetchPostById(query.postId));
 
 const Post = styled.div`
     margin: 1rem;
@@ -80,7 +60,9 @@ const StyledLink = styled.a`
     color: ${({ theme }) => theme.colors.primary}};
     font-weight: bold;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 10px;: 
 `;
 
-export default PostCard
+
+
+export default connect(state => state)(PostCard);
