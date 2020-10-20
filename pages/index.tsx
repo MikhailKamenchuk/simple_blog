@@ -13,7 +13,7 @@ const Home = ({ error }: IState) => {
     if (error) {
         return <div>Something wrong...</div>
     }
-    const lastPosts = useSelector((state: IState) => state.posts.slice(state.posts.length - 4))
+    const lastPosts = useSelector((state: IState) => state.posts.slice(state.posts.length - 4).reverse())
     return (
         <Container>
             <Head>

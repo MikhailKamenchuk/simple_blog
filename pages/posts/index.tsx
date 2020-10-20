@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import PostsList from '../../src/components/PostsList';
-import {fetchPostsList} from '../../redux/actions'
+import { fetchPostsList } from '../../redux/actions'
 
 
 interface Post {
@@ -17,33 +17,34 @@ interface PostsProps {
 }
 
 const Posts = ({ posts }: PostsProps) => {
-  return (
-      <Container>
-          <Header>
-              <Navigation>
-                  <Link href="/" as="/">
-                      <StyledLink>&larr; Back home</StyledLink>
-                  </Link>
-                  <Link href="/posts/new" as="/posts/new">
-                      <StyledLink>Create post &rarr;</StyledLink>
-                  </Link>
-              </Navigation>
-          </Header>
-          <Main>
-              <Title>Posts</Title>
-              <PostsList posts={posts} />
-          </Main>
-          <Footer>
-              <div>
-                  Created by 
-                  {" "}
-                  <a href='https://www.linkedin.com/in/mikhail-kamenchuk-6a1611158/'>
-                      Mikhail Kamenchuk
-                  </a>
-              </div>
-          </Footer>
-      </Container>
-  )
+    const reversePosts = [...posts].reverse()
+    return (
+        <Container>
+            <Header>
+                <Navigation>
+                    <Link href="/" as="/">
+                        <StyledLink>&larr; Back home</StyledLink>
+                    </Link>
+                    <Link href="/posts/new" as="/posts/new">
+                        <StyledLink>Create post &rarr;</StyledLink>
+                    </Link>
+                </Navigation>
+            </Header>
+            <Main>
+                <Title>Posts</Title>
+                <PostsList posts={reversePosts} />
+            </Main>
+            <Footer>
+                <div>
+                    Created by
+                    {" "}
+                    <a href='https://www.linkedin.com/in/mikhail-kamenchuk-6a1611158/'>
+                        Mikhail Kamenchuk
+                    </a>
+                </div>
+            </Footer>
+        </Container>
+    )
 }
 
 Posts.getInitialProps = ({ store }) => store.dispatch(fetchPostsList());
