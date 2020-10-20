@@ -11,11 +11,8 @@ interface IComment {
     body: string,
 }
 
-interface AddCommentFormProps {
-    postId: number,
-}
 
-const AddCommentForm = ({ postId, addComment }: AddCommentFormProps, ) => {
+const AddCommentForm = ({ postId, addComment }) => {
     // debugger
     const { register, errors, handleSubmit, reset } = useForm<IComment>();
     const router = useRouter();
